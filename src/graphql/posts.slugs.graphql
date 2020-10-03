@@ -1,0 +1,9 @@
+query PostsWithSlug {
+    posts(first: 1000) {
+        edges {
+            node {
+                slug
+            }
+        }
+    }
+}

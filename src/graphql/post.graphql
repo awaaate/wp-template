@@ -1,0 +1,19 @@
+query PostBySlug($slug: String!) {
+    postBy(slug: $slug) {
+        content
+        excerpt
+        title
+        slug
+        featuredImage {
+            node {
+                id
+                slug
+            }
+        }
+        seo {
+            canonical
+            metaDesc
+            title
+        }
+    }
+}
