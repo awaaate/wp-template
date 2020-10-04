@@ -39,25 +39,8 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
 
         featuredImage: {
             id: post.featuredImage.node.id,
-            slug: post.featuredImage.node.slug,
+            sourceUrl: post.featuredImage.node.sourceUrl,
         },
     };
 }
 
-`
-content
-excerpt
-title
-slug
-featuredImage {
-node {
-sourceUrl
-}
-}
-seo {
-    canonical
-    metaDesc
-    title
-}
-}
-`;

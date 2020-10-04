@@ -10774,7 +10774,7 @@ export type PostBySlugQuery = (
       { __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge' }
       & { node?: Maybe<(
         { __typename?: 'MediaItem' }
-        & Pick<MediaItem, 'id' | 'slug'>
+        & Pick<MediaItem, 'id' | 'sourceUrl'>
       )> }
     )>, seo?: Maybe<(
       { __typename?: 'PostTypeSEO' }
@@ -10848,7 +10848,7 @@ export const PostBySlugDocument = gql`
     featuredImage {
       node {
         id
-        slug
+        sourceUrl
       }
     }
     seo {

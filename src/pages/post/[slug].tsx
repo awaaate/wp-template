@@ -1,4 +1,4 @@
-import { Box, Image } from "@chakra-ui/core";
+import { Box, Heading, Image } from "@chakra-ui/core";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Container } from "../../components/layouts/container";
 import { Menu } from "../../components/menu/menu";
@@ -19,18 +19,46 @@ function PostPage({ post, categories }: PageProps) {
         <div>
             <Menu categories={categories} />
             <Container>
-              <Box m="4">
-              <Box>
-                    <Image src={ post.featuredImage.sourceUrl} />
+                <Box>
+                    <Box
+                        position="relative"
+                        minH="150px"
+                        backgroundImage={`url(${post.featuredImage.sourceUrl})`}
+                        backgroundSize="cover"
+                        backgroundPosition="center"
+                        display="flex"
+                        justifyContent="center"
+                        alignItems="center"
+                        color="white"
+                        p={2}
+                    >
+                        <Heading textAlign="center" zIndex={1}>
+                            {post.title}
+                        </Heading>
+                        <div
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                background: "black",
+                                width: "100%",
+                                height: "100%",
+                                zIndex: 0,
+                                opacity: 0.4,
+                            }}
+                        />
+                    </Box>
+                    <Box
+                        className="content"
+                        p={4}
+                        maxW="100%"
+                        bg="white"
+                        width="100%"
+                        dangerouslySetInnerHTML={{
+                            __html: post.content,
+                        }}
+                    ></Box>
                 </Box>
-                <h1>{post.title} </h1>
-                <Box
-                    bg="white"
-                    dangerouslySetInnerHTML={{
-                        __html: post.content,
-                    }}
-                ></Box>
-              </Box>
             </Container>
         </div>
     );

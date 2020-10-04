@@ -1,9 +1,12 @@
+import { CSSReset, ThemeProvider } from "@chakra-ui/core";
 import { AppProps } from "next/app";
-import { Fragment } from "react";
 import Head from "next/head";
 
+import "../styles/toc.css";
+import "../styles/yt-player.css";
 import "../styles/main.css";
-import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import "../styles/utilities.css";
+
 function App({ Component, pageProps }: AppProps) {
     return (
         <ThemeProvider >

@@ -7,7 +7,7 @@ query PostBySlug($slug: String!) {
         featuredImage {
             node {
                 id
-                slug
+                sourceUrl
             }
         }
         seo {
