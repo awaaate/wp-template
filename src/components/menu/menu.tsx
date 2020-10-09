@@ -1,27 +1,30 @@
 import {
-    Accordion,
-    AccordionHeader,
-    AccordionIcon,
-    AccordionItem,
-    AccordionPanel,
     Box,
+    Button,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerHeader,
+    DrawerOverlay,
     Flex,
-    Grid,
     Image,
     Link,
     PseudoBox,
     Stack,
 } from "@chakra-ui/core";
-import React from "react";
-import CUSTOMIZE from "../../customize.json";
+import { FaBars, FaHamburger } from "react-icons/fa";
 import NextLink from "next/link";
-import { CategoryType } from "../../types/types";
+import React, { useState } from "react";
+import CUSTOMIZE from "../../customize.json";
+import { SimpleCategoryWithId } from "../../types/types";
 
 interface MenuProps {
-    categories: CategoryType[];
+    categories: SimpleCategoryWithId[];
 }
 
 export const Menu: React.FC<MenuProps> = ({ categories }) => {
+    const [menuIsOpen, setMenuIsOpen] = useState(false);
     return (
         <Box
             maxH="100px"
@@ -31,7 +34,18 @@ export const Menu: React.FC<MenuProps> = ({ categories }) => {
             color="white"
             borderBottomWidth="2px"
             mb="20px"
+            position="fixed"
+            top="0"
+            left="0"
         >
+            <Box
+                h="5px"
+                position="absolute"
+                top="0"
+                left="0"
+                w="full"
+                className="bg-primary"
+            />
             <Flex
                 margin="auto"
                 maxW={CUSTOMIZE.container_size}
@@ -42,34 +56,29 @@ export const Menu: React.FC<MenuProps> = ({ categories }) => {
                 <Box>
                     <NextLink href="/" passHref>
                         <Link display="block">
-                            <Image src="/logo.png" maxW="300px" w="100%" h="auto" />
+                            <Image
+                                src="/logo.png"
+                                maxW="300px"
+                                w="100%"
+                                h="auto"
+                            />
                         </Link>
                     </NextLink>
                 </Box>
-                <Accordion allowToggle w="100%" maxW="130px" border="0" defaultIndex={[-1]}>
-                    <AccordionItem
-                        className="bg-primary border-rgba"
-                        border="2px solid"
-                        borderBottomWidth="4px !important"
-                        borderColor="rgba(0,0,0,0.2)"
-                        position="relative"
-                        zIndex={40}
-                        rounded="sm"
-                        padding="0"
-                    >
-                        <AccordionHeader>
-                            <Box flex="1" textAlign="left">
-                                Menu
-                            </Box>
-                            <AccordionIcon />
-                        </AccordionHeader>
-                        <AccordionPanel
-                            pb={4}
-                            bg="white"
-                            position="absolute"
-                            shadow="sm"
-                            rounded="md"
-                        >
+                <Button onClick={() => setMenuIsOpen(!menuIsOpen)}>
+                    <FaBars />
+                </Button>
+                <Drawer
+                    isOpen={menuIsOpen}
+                    placement="right"
+                    onClose={() => setMenuIsOpen(false)}
+                >
+                    <DrawerOverlay />
+                    <DrawerContent>
+                        <DrawerCloseButton />
+                        <DrawerHeader>Menu</DrawerHeader>
+
+                        <DrawerBody>
                             <Stack>
                                 {categories.map((category) => (
                                     <PseudoBox
@@ -77,17 +86,19 @@ export const Menu: React.FC<MenuProps> = ({ categories }) => {
                                         p={1}
                                         color="black"
                                         cursor="pointer"
-                                        _hover={{
-                                            bg: "blue.100",
-                                        }}
                                     >
-                                        <a>{category.name}</a>
+                                        <NextLink
+                                            href={"/category/" + category.slug}
+                                            passHref
+                                        >
+                                            <Link>{category.name}</Link>
+                                        </NextLink>
                                     </PseudoBox>
                                 ))}
                             </Stack>
-                        </AccordionPanel>
-                    </AccordionItem>
-                </Accordion>
+                        </DrawerBody>
+                    </DrawerContent>
+                </Drawer>
             </Flex>
         </Box>
     );

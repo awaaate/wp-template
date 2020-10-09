@@ -1,11 +1,14 @@
 import { type } from "os";
 import { Category, MediaItem, Post, PostTypeSeo } from "../generated/graphql";
 import { getAllPosts, getPostBySlug } from "../lib/api";
+
+export type CategoryWithNameAndSlug = Array<{ name: string; slug: string }>;
 export interface PostType {
     content: string;
     excerpt: string;
     title: string;
     slug: string;
+    categories: Array<{ name: string; slug: string }>;
     featuredImage: {
         sourceUrl: string;
         id: string;
@@ -18,13 +21,20 @@ export interface PostType {
 }
 export type PostPreview = {
     featuredImage: {
-        __typename?: "MediaItem";
-    } & Pick<MediaItem, "id" | "sourceUrl">;
-    __typename?: "Post";
+        sourceUrl: string;
+    };
     slug?: string;
     title?: string;
     id: string;
     excerpt?: string;
 };
 
-export type CategoryType = Pick<Category, "id" | "slug" | "name">;
+export type CategoryType = {
+    slug: string;
+    posts: PostPreview[];
+};
+export type SimpleCategoryWithId = {
+    id: string;
+    slug: string;
+    name: string;
+};

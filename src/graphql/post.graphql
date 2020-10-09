@@ -4,6 +4,14 @@ query PostBySlug($slug: String!) {
         excerpt
         title
         slug
+        categories {
+            edges {
+                node {
+                    name
+                    slug
+                }
+            }
+        }
         featuredImage {
             node {
                 id

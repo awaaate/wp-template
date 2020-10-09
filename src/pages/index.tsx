@@ -4,11 +4,11 @@ import { Container } from "../components/layouts/container";
 import { Menu } from "../components/menu/menu";
 import { PostGrid } from "../components/post/post.grid";
 import { getAllCategories, getAllPosts } from "../lib/api";
-import { CategoryType, PostPreview } from "../types/types";
+import { SimpleCategoryWithId, PostPreview } from "../types/types";
 
 interface PageProps {
     posts: PostPreview[];
-    categories: CategoryType[];
+    categories: SimpleCategoryWithId[];
 }
 function Index({ posts, categories }: PageProps) {
     return (

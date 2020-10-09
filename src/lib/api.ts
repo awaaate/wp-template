@@ -1,13 +1,22 @@
 import { GraphQLClient } from "graphql-request";
 import { getSdk } from "../generated/graphql";
-import { PostType } from "../types/types";
+import {
+    CategoryWithNameAndSlug,
+    PostType,
+    CategoryType,
+    SimpleCategoryWithId,
+} from "../types/types";
 
 const client = new GraphQLClient("https://eliminar-cuenta.com/graphql");
 const sdk = getSdk(client);
 
-export async function getAllCategories() {
+export async function getAllCategories(): Promise<SimpleCategoryWithId[]> {
     const response = await sdk.Categories();
-    return response.data.categories.edges.map((a) => a.node);
+    return response.data.categories.edges.map(({ node }) => ({
+        slug: node.slug,
+        id: node.id,
+        name: node.name,
+    }));
 }
 
 export async function getAllPosts() {
@@ -22,7 +31,24 @@ export async function getAllPostsWithSlugs() {
 
     return response.data.posts.edges.map((a) => a.node);
 }
+export async function getCategoryById(id: string) {
+    const response = await sdk.CategoryById({ id });
+    const rawCategory = response.data.category;
+    let category: CategoryType = {
+        slug: rawCategory.slug,
+        posts: rawCategory.posts.edges.map(({ node }) => ({
+            excerpt: node.excerpt,
+            featuredImage: {
+                sourceUrl: node.featuredImage.node.sourceUrl,
+            },
+            id: node.id,
+            title: node.title,
+            slug: node.slug,
+        })),
+    };
 
+    return category;
+}
 export async function getPostBySlug(slug: string): Promise<PostType> {
     const response = await sdk.PostBySlug({ slug });
     const post = response.data.postBy;
@@ -31,6 +57,9 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
         excerpt: post.excerpt,
         title: post.title,
         slug: post.slug,
+        categories: post.categories.edges.map(
+            (cat) => cat.node
+        ) as CategoryWithNameAndSlug,
         seo: {
             canonical: post.seo.canonical,
             title: post.seo.title,
@@ -43,4 +72,3 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
         },
     };
 }
-

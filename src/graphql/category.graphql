@@ -1,0 +1,20 @@
+query CategoryById($id: ID!) {
+    category(id: $id) {
+        slug
+        posts {
+            edges {
+                node {
+                    slug
+                    title
+                    excerpt
+                    featuredImage {
+                        node {
+                            sourceUrl
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+}
