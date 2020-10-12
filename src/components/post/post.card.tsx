@@ -17,16 +17,16 @@ interface PostCardProps {
 
 export const PostCard: React.FC<PostCardProps> = ({ post }) => {
     return (
-        <NextLink href={`/post/${post.slug}`} passHref>
+        <NextLink href={`/${post.slug}`} passHref>
             <Link>
                 <Box
                     maxW="sm"
-                    borderWidth="1px"
+                    borderWidth="2px"
+                    borderColor="black"
                     bg="white"
                     overflow="hidden"
                     w="full"
                     h="full"
-                    rounded="md"
                 >
                     <Image
                         src={post.featuredImage.sourceUrl}
@@ -34,14 +34,16 @@ export const PostCard: React.FC<PostCardProps> = ({ post }) => {
                         w="full"
                         objectFit="cover"
                     />
-                    <Divider />
 
-                    <Heading size="xl" padding="2" >
+                    <Heading size="md" padding="2" mt="2">
                         {post.title}
                     </Heading>
                     <Text
-                    p="2"
-                        dangerouslySetInnerHTML={createExcerpt(post.excerpt, 10)}
+                        p="2"
+                        dangerouslySetInnerHTML={createExcerpt(
+                            post.excerpt,
+                            10
+                        )}
                     ></Text>
                 </Box>
             </Link>

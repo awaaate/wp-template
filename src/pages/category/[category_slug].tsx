@@ -1,5 +1,6 @@
 import { Box } from "@chakra-ui/core";
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import React from "react";
 import { Container } from "../../components/layouts/container";
 import { Menu } from "../../components/menu/menu";
@@ -15,9 +16,12 @@ interface PageProps {
 function CategoryPage({ categories, category }: PageProps) {
     return (
         <Box>
+            
             <Menu categories={categories}></Menu>
             <Container>
-                <PostGrid posts={category.posts} />
+                <Box mt="20px">
+                    <PostGrid posts={category.posts} />
+                </Box>
             </Container>
         </Box>
     );

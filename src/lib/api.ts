@@ -7,12 +7,12 @@ import {
     SimpleCategoryWithId,
 } from "../types/types";
 
-const client = new GraphQLClient("https://eliminar-cuenta.com/graphql");
+const client = new GraphQLClient("https://api.eliminar-cuenta.com/graphql");
 const sdk = getSdk(client);
 
 export async function getAllCategories(): Promise<SimpleCategoryWithId[]> {
     const response = await sdk.Categories();
-    return response.data.categories.edges.map(({ node }) => ({
+    return response.categories.edges.map(({ node }) => ({
         slug: node.slug,
         id: node.id,
         name: node.name,
@@ -21,7 +21,7 @@ export async function getAllCategories(): Promise<SimpleCategoryWithId[]> {
 
 export async function getAllPosts() {
     const response = await sdk.Posts();
-    return response.data.posts.edges.map((a) => {
+    return response.posts.edges.map((a) => {
         const post = a.node;
         return { ...post, featuredImage: post.featuredImage.node };
     });
@@ -29,11 +29,11 @@ export async function getAllPosts() {
 export async function getAllPostsWithSlugs() {
     const response = await sdk.PostsWithSlug();
 
-    return response.data.posts.edges.map((a) => a.node);
+    return response.posts.edges.map((a) => a.node);
 }
 export async function getCategoryById(id: string) {
     const response = await sdk.CategoryById({ id });
-    const rawCategory = response.data.category;
+    const rawCategory = response.category;
     let category: CategoryType = {
         slug: rawCategory.slug,
         posts: rawCategory.posts.edges.map(({ node }) => ({
@@ -51,7 +51,7 @@ export async function getCategoryById(id: string) {
 }
 export async function getPostBySlug(slug: string): Promise<PostType> {
     const response = await sdk.PostBySlug({ slug });
-    const post = response.data.postBy;
+    const post = response.postBy;
     return {
         content: post.content,
         excerpt: post.excerpt,

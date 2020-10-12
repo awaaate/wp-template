@@ -4,6 +4,7 @@ query CategoryById($id: ID!) {
         posts {
             edges {
                 node {
+                    id
                     slug
                     title
                     excerpt

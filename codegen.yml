@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://eliminar-cuenta.com/graphql"
+schema: "https://api.eliminar-cuenta.com/graphql"
 documents: "src/**/*.graphql"
 generates:
     src/generated/graphql.ts:
@@ -7,5 +7,3 @@ generates:
             - typescript
             - typescript-operations
             - typescript-graphql-request
-        config:
-            rawRequest: true

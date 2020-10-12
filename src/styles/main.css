@@ -4,14 +4,15 @@ body {
     height: 100%;
 }
 body {
-    padding-top: 100px;
+    padding-top: 82px;
 }
 * {
-    font-family: "Source Sans Pro", sans-serif;
-    color: #1a202c;
+    font-family: "Space Mono", monospace;
+    color: #3c3c3c;
 }
 :root {
     --primary: #363441;
+    --black: #3c3c3c;
 }
 h2 {
     font-size: 2rem;
@@ -31,7 +32,14 @@ h2 {
 }
 .content a {
     font-weight: 600;
-    color: #4299e1 !important;
+    background-image: linear-gradient(to right,#f8be2d 100%,#fff 0);
+    background-position: 0 80%;
+    background-repeat: repeat-x;
+    background-size: 100% 23%;
+    padding-left: 1px!important;
+    padding-right: 1px!important;
+    margin-left: -1px;
+    margin-right: -1px;
 }
 
 .content img {

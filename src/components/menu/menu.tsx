@@ -27,25 +27,19 @@ export const Menu: React.FC<MenuProps> = ({ categories }) => {
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     return (
         <Box
-            maxH="100px"
+            h="82px"
             w="full"
             padding="20px"
             bg="white"
             color="white"
             borderBottomWidth="2px"
-            mb="20px"
+            borderColor="black"
             position="fixed"
             top="0"
             left="0"
+            zIndex={999}
         >
-            <Box
-                h="5px"
-                position="absolute"
-                top="0"
-                left="0"
-                w="full"
-                className="bg-primary"
-            />
+            
             <Flex
                 margin="auto"
                 maxW={CUSTOMIZE.container_size}
@@ -65,8 +59,8 @@ export const Menu: React.FC<MenuProps> = ({ categories }) => {
                         </Link>
                     </NextLink>
                 </Box>
-                <Button onClick={() => setMenuIsOpen(!menuIsOpen)}>
-                    <FaBars />
+                <Button onClick={() => setMenuIsOpen(!menuIsOpen)} variantColor="white">
+                    <FaBars size="30" />
                 </Button>
                 <Drawer
                     isOpen={menuIsOpen}

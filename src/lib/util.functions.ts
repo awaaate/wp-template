@@ -3,7 +3,6 @@ export function createStaticPaths(params: Record<string, string>[]) {
 }
 
 export function createExcerpt(text: string, maxWords: number = 60) {
-    console.log(text);
     return {
         __html: text.split(" ").slice(0, maxWords).join(" ") + "...",
     };
