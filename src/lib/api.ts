@@ -61,7 +61,7 @@ export async function getPostBySlug(slug: string): Promise<PostType> {
             (cat) => cat.node
         ) as CategoryWithNameAndSlug,
         seo: {
-            canonical: post.seo.canonical,
+            canonical: 'https://eliminar-cuenta.com' + post.slug,
             title: post.seo.title,
             metaDesc: post.seo.metaDesc,
         },

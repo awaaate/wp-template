@@ -1,4 +1,3 @@
-import { type } from "os";
 import { Category, MediaItem, Post, PostTypeSeo } from "../generated/graphql";
 import { getAllPosts, getPostBySlug } from "../lib/api";
 
